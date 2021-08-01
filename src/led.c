@@ -8,22 +8,6 @@
 
 #include "led.h"
 
-/**
- * @brief Enciende el led que le defino
- * 
- * @param led gpioMap_t
- * @return bool_t (true si logro encender)
- */
-#define encenderLed(led) gpioWrite(led, 1)
-
-/**
- * @brief apago el led que le defino
- * 
- * @param led gpioMap_t
- * @return bool_t (true si logro apagar)
- */
-#define apagarLed(led) gpioWrite(led, 0)
-
 bool_t apagarLeds(void) {
 	bool_t no_error;
 	uint8_t i;

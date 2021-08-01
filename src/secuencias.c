@@ -28,7 +28,7 @@ static void incrementarSecuencia(void) {
 	}
 }
 /*=====[Implementation of public functions]==================================*/
-void configurarSecuencia(gpioMap_t psecuencia[], uint16_t tiempo_destello[], uint8_t tamanio_secuencia) {
+void IniciarMEFSecuencia(uint8_t psecuencia[], uint16_t tiempo_destello[], uint8_t tamanio_secuencia) {
 
    secuencia.ptrPrimerLed = &psecuencia[0];
    secuencia.ptrLed = secuencia.ptrPrimerLed;
@@ -40,10 +40,19 @@ void configurarSecuencia(gpioMap_t psecuencia[], uint16_t tiempo_destello[], uin
    secuencia.ptrUltimoTiempo = &tiempo_destello[tamanio_secuencia];
 }
 
-void activarSecuencia(void) {
+void ActualizarMEFSecuencia(void) {
    if(delayRead(&delayLeds)) {
       incrementarSecuencia();
-      encenderLedUnico(*secuencia.ptrLed);
+      uint8_t led;
+      for (led = 0; led < (LED3 - LEDR + 1); led++) {
+         if (*secuencia.ptrLed & (1<<led)) {
+            encenderLed(led+LEDR);
+         }
+         else {
+            apagarLed(led+LEDR);
+         }
+      }
+      if(*secuencia.ptrLed);
       delayConfig(&delayLeds, *secuencia.ptrTiempo);
    }
 }

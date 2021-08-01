@@ -22,7 +22,12 @@ extern "C" {
 #endif
 
 /*=====[Definition macros of public constants]===============================*/
-
+#define LEDR_ON      (1 << (LEDR - LEDR)) // LEDR ON
+#define LEDG_ON      (1 << (LEDG - LEDR)) // LEDG ON
+#define LEDB_ON      (1 << (LEDB - LEDR)) // LEDB ON
+#define LED1_ON      (1 << (LED1 - LEDR)) // LED1 ON
+#define LED2_ON      (1 << (LED2 - LEDR)) // LED2 ON
+#define LED3_ON      (1 << (LED3 - LEDR)) // LED3 ON
 
 /*=====[Public function-like macros]=========================================*/
 
@@ -32,9 +37,9 @@ extern "C" {
  * 
  */
 typedef struct {
-   gpioMap_t *ptrLed;
-   gpioMap_t *ptrPrimerLed;
-   gpioMap_t *ptrUltimoLed;
+   uint8_t *ptrLed;
+   uint8_t *ptrPrimerLed;
+   uint8_t *ptrUltimoLed;
 
    uint16_t *ptrTiempo;
    uint16_t *ptrPrimerTiempo;
@@ -46,7 +51,7 @@ typedef struct {
  * @brief gestiona la eleccion del led que debe encenderse según la secuencia que se le pasa por referencia
  * 
  */
-void activarSecuencia(void);
+void ActualizarMEFSecuencia(void);
 /**
  * @brief Congfigura la secuencia y tiempos que se van a utilizar para conmutar los Leds.
  * 
@@ -54,7 +59,7 @@ void activarSecuencia(void);
  * @param tiempo_destello 
  * @param tamanio_secuencia 
  */
-void configurarSecuencia(gpioMap_t psecuencia[], uint16_t tiempo_destello[], uint8_t tamanio_secuencia);
+void IniciarMEFSecuencia(uint8_t psecuencia[], uint16_t tiempo_destello[], uint8_t tamanio_secuencia);
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
 
 /*=====[C++ - end]===========================================================*/

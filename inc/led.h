@@ -24,7 +24,21 @@ extern "C" {
 /*=====[Definition macros of public constants]===============================*/
 
 /*=====[Public function-like macros]=========================================*/
+/**
+ * @brief Enciende el led que le defino
+ * 
+ * @param led gpioMap_t
+ * @return bool_t (true si logro encender)
+ */
+#define encenderLed(led) gpioWrite(led, 1)
 
+/**
+ * @brief apago el led que le defino
+ * 
+ * @param led gpioMap_t
+ * @return bool_t (true si logro apagar)
+ */
+#define apagarLed(led) gpioWrite(led, 0)
 /*=====[Definitions of public data types]====================================*/
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
