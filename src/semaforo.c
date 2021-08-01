@@ -31,16 +31,34 @@ typedef enum {
 } semaforo_state_t;
 
 /*=====[Definitions of private functions]====================================*/
+/**
+ * @brief Estado normal del semaforo. ROJO, ROJO_AMARILLO, VERDE, AMARILLO
+ * 
+ */
 static void NormalState(void);
+/**
+ * @brief Estado desconectado del semaforo. AMARILLO, OFF, AMARILLO, OFF
+ * 
+ */
 static void DisconnectedState(void);
+/**
+ * @brief Estado alarma del semaforo. ROJO, OFF, ROJO, OFF
+ * 
+ */
 static void AlarmState(void);
 
 /*=====[Definitions of private global variables]=============================*/
 static semaforo_state_t semaforo_state;
 static bool_t change_state = 0;
-
+/**
+ * @brief Vector con los tiempos de la secuencia
+ * 
+ */
 static uint16_t tiempo[4] = {PERIODO_3S,PERIODO_500MS,PERIODO_1S,PERIODO_500MS};
-
+/**
+ * @brief Matriz que tiene en la primera dimensión los posibles estados de semaforo y en la segunda dimensión la secuencia de leds que deben ensenderse en cada estado.
+ * 
+ */
 static uint8_t secuencia[SEMAFORO_QTY][4] = {{LED_ROJO    , LED_ROJO | LED_AMARILLO , LED_VERDE    , LED_AMARILLO},
                                              {LED_ROJO    , LED_OFF                 , LED_ROJO     , LED_OFF     },
                                              {LED_AMARILLO, LED_OFF                 , LED_AMARILLO , LED_OFF     }};
@@ -68,6 +86,7 @@ void ActualizarMEFSeaforo(void) {
     ActualizarMEFSecuencia();
 }
 /*=====[Implementation of private functions]====================================*/
+
 static void NormalState(void) {
     if(change_state) {
         change_state = FALSE_T;

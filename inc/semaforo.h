@@ -23,8 +23,15 @@ extern "C" {
 #endif
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
+/**
+ * @brief Inicia la maquina de estados del semaforo.
+ * 
+ */
 void IniciarMEFSeaforo(void);
-
+/**
+ * @brief Actualiza la maquina de estados del semaforo.
+ * 
+ */
 void ActualizarMEFSeaforo(void);
 /*=====[C++ - end]===========================================================*/
 
