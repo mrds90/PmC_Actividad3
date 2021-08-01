@@ -49,7 +49,7 @@ static void AlarmState(void);
 
 /*=====[Definitions of private global variables]=============================*/
 static semaforo_state_t semaforo_state;
-static bool_t change_state = 0;
+
 /**
  * @brief Vector con los tiempos de la secuencia
  * 
@@ -76,48 +76,37 @@ void ActualizarMEFSeaforo(void) {
     
     ActualizarMEFTecla(TEC2);
     if (CheckFallState(TEC2)) {
-        change_state = TRUE_T;
         if(++semaforo_state >= SEMAFORO_QTY) {
             semaforo_state = NORMAL;
         }
+        SemaforoFunc[semaforo_state]();
     }
-    
-    SemaforoFunc[semaforo_state]();
+
     ActualizarMEFSecuencia();
 }
 /*=====[Implementation of private functions]====================================*/
 
 static void NormalState(void) {
-    if(change_state) {
-        change_state = FALSE_T;
-        tiempo[0] = PERIODO_3S;
-        tiempo[1] = PERIODO_500MS;
-        tiempo[2] = PERIODO_1S;
-        tiempo[3] = PERIODO_500MS;
-        IniciarMEFSecuencia(secuencia[NORMAL],tiempo,sizeof(secuencia[NORMAL])/sizeof(secuencia[NORMAL][0]));
-    }
+    tiempo[0] = PERIODO_3S;
+    tiempo[1] = PERIODO_500MS;
+    tiempo[2] = PERIODO_1S;
+    tiempo[3] = PERIODO_500MS;
+    IniciarMEFSecuencia(secuencia[NORMAL],tiempo,sizeof(secuencia[NORMAL])/sizeof(secuencia[NORMAL][0]));
 }
 
-
 static void DisconnectedState(void) {
-    if(change_state) {
-        change_state = FALSE_T;
-        tiempo[0] = PERIODO_500MS;
-        tiempo[1] = PERIODO_500MS;
-        tiempo[2] = PERIODO_500MS;
-        tiempo[3] = PERIODO_500MS;
-        IniciarMEFSecuencia(secuencia[DISCONECTED],tiempo,sizeof(secuencia[DISCONECTED])/sizeof(secuencia[DISCONECTED][0]));
-    }
+    tiempo[0] = PERIODO_500MS;
+    tiempo[1] = PERIODO_500MS;
+    tiempo[2] = PERIODO_500MS;
+    tiempo[3] = PERIODO_500MS;
+    IniciarMEFSecuencia(secuencia[DISCONECTED],tiempo,sizeof(secuencia[DISCONECTED])/sizeof(secuencia[DISCONECTED][0]));
 }
 
 static void AlarmState(void) {
-    if(change_state) {
-        change_state = FALSE_T;
-        tiempo[0] = PERIODO_1S;
-        tiempo[1] = PERIODO_1S;
-        tiempo[2] = PERIODO_1S;
-        tiempo[3] = PERIODO_1S;
-        IniciarMEFSecuencia(secuencia[ALARM],tiempo,sizeof(secuencia[ALARM])/sizeof(secuencia[ALARM][0]));
-    }
+    tiempo[0] = PERIODO_1S;
+    tiempo[1] = PERIODO_1S;
+    tiempo[2] = PERIODO_1S;
+    tiempo[3] = PERIODO_1S;
+    IniciarMEFSecuencia(secuencia[ALARM],tiempo,sizeof(secuencia[ALARM])/sizeof(secuencia[ALARM][0]));
 }
 

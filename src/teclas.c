@@ -103,7 +103,7 @@ bool_t CheckRaiseState(gpioMap_t index_tecla) {
 
 bool_t CheckFallState(gpioMap_t index_tecla) { 
    uint8_t array_index = index_tecla - TEC1;
-   bool_t flag = teclas[array_index].flag_fall;   
+   bool_t flag = teclas[array_index].flag_fall;
    teclas[array_index].flag_fall = 0;
    return flag;
 }

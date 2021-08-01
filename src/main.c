@@ -13,14 +13,14 @@
 
 int main(void)
 {
-	boardInit();
+	boardInit();///< Initialize board
 
-	IniciarMEFSeaforo();
+	IniciarMEFSeaforo();///< Initialize semaphore
    // ----- Loop infinito -------------------------
-    while(true) {
-		ActualizarMEFSeaforo();
+   while(true) {
+		ActualizarMEFSeaforo();///< Update semaphore
    }
-	// Nunca se alcanza este punto debido al ciclo infinito del while(true)
+	
    return 0;
 }
 
