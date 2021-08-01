@@ -18,7 +18,10 @@ static delay_t delayLeds;
 static control_secuencia_t secuencia;
 
 /*=====[Implementation of private functions]====================================*/
-
+/**
+ * @brief Avanza la maquina de estado Secuencia. Si llega al ultimo estado la reinicia.
+ * 
+ */
 static void incrementarSecuencia(void) {
 	secuencia.ptrLed++;
    secuencia.ptrTiempo++;
@@ -27,6 +30,10 @@ static void incrementarSecuencia(void) {
       secuencia.ptrTiempo = secuencia.ptrPrimerTiempo;
 	}
 }
+/**
+ * @brief Función que decodifica los led que hay que encender y apagar segun el valor de la variable secuencia en ptrLed.
+ * 
+ */
 static void DecodificarSecuencia(void) {
    uint8_t led;
    for (led = 0; led < (LED3 - LEDR + 1); led++) {
@@ -58,7 +65,6 @@ void ActualizarMEFSecuencia(void) {
    if(delayRead(&delayLeds)) {
       incrementarSecuencia();
       DecodificarSecuencia();
-      if(*secuencia.ptrLed);
       delayConfig(&delayLeds, *secuencia.ptrTiempo);
    }
 }

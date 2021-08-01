@@ -22,6 +22,12 @@ extern "C" {
 #endif
 
 /*=====[Definition macros of public constants]===============================*/
+/**
+ * @brief Con estos DEFINE se define en un unico numero de 6 bits que leds se encuentran activos.
+ * Ejemplo: 00110101 -> leds: LEDR, LEDB, LED2 y LED3
+ * Esto se puede escribir como: leds =  LEDR_ON | LEDB_ON | LED2_ON | LED3_ON
+ * 
+ */
 #define LEDR_ON      (1 << (LEDR - LEDR)) // LEDR ON
 #define LEDG_ON      (1 << (LEDG - LEDR)) // LEDG ON
 #define LEDB_ON      (1 << (LEDB - LEDR)) // LEDB ON
@@ -55,9 +61,9 @@ void ActualizarMEFSecuencia(void);
 /**
  * @brief Congfigura la secuencia y tiempos que se van a utilizar para conmutar los Leds.
  * 
- * @param psecuencia 
- * @param tiempo_destello 
- * @param tamanio_secuencia 
+ * @param psecuencia Es un vector donde cada elemento tiene un numero que representa los led a encender
+ * @param tiempo_destello Es un vector del mismo tamaño que psecuencia y representa el tiempo que debe estar encendido los led correspondientes a psecuencia
+ * @param tamanio_secuencia Es el tamaño del vector psecuencia.
  */
 void IniciarMEFSecuencia(uint8_t psecuencia[], uint16_t tiempo_destello[], uint8_t tamanio_secuencia);
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
