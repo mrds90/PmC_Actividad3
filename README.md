@@ -32,7 +32,7 @@ Es la capa de la aplicación que se ejecuta. En esta solo se utiliza la funcione
 ### Semáforo
 Es la capa donde se cambian a los distintos modos de semáfro. En esta utiliza los servicios de Tecla y Secuencia
 ### Teclas
-Esta capa interpreta, si se le consulta, si se presiono o solto una tecla.
+Esta capa interpreta si se presiono o solto una tecla.
 ### Secuencias
 Esta capa se encarga de llevar el control de las conmutaciones dentro de una secuencia. Ofrece la posibilidad de configurar una secuencia y luego se encarga de gestionar el recorrido de la misma a los tiempos configurados.
 Esta misma capa enciende los led correspondientes, en funcion de la secuencia configurada.
