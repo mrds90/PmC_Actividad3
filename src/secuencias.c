@@ -27,6 +27,17 @@ static void incrementarSecuencia(void) {
       secuencia.ptrTiempo = secuencia.ptrPrimerTiempo;
 	}
 }
+static void DecodificarSecuencia(void) {
+   uint8_t led;
+   for (led = 0; led < (LED3 - LEDR + 1); led++) {
+      if (*secuencia.ptrLed & (1<<led)) {
+         encenderLed(led+LEDR);
+      }
+      else {
+         apagarLed(led+LEDR);
+      }
+   }
+}
 /*=====[Implementation of public functions]==================================*/
 void IniciarMEFSecuencia(uint8_t psecuencia[], uint16_t tiempo_destello[], uint8_t tamanio_secuencia) {
 
@@ -38,22 +49,18 @@ void IniciarMEFSecuencia(uint8_t psecuencia[], uint16_t tiempo_destello[], uint8
 
    secuencia.ptrUltimoLed = &psecuencia[tamanio_secuencia];
    secuencia.ptrUltimoTiempo = &tiempo_destello[tamanio_secuencia];
+
+   DecodificarSecuencia();
+   delayConfig(&delayLeds, *secuencia.ptrTiempo);
 }
 
 void ActualizarMEFSecuencia(void) {
    if(delayRead(&delayLeds)) {
       incrementarSecuencia();
-      uint8_t led;
-      for (led = 0; led < (LED3 - LEDR + 1); led++) {
-         if (*secuencia.ptrLed & (1<<led)) {
-            encenderLed(led+LEDR);
-         }
-         else {
-            apagarLed(led+LEDR);
-         }
-      }
+      DecodificarSecuencia();
       if(*secuencia.ptrLed);
       delayConfig(&delayLeds, *secuencia.ptrTiempo);
    }
 }
+
 

@@ -32,8 +32,8 @@ typedef enum {
 
 /*=====[Definitions of private functions]====================================*/
 static void NormalState(void);
-static void AlarmState(void);
 static void DisconnectedState(void);
+static void AlarmState(void);
 
 /*=====[Definitions of private global variables]=============================*/
 static semaforo_state_t semaforo_state;
@@ -54,7 +54,7 @@ void IniciarMEFSeaforo(void) {
 }
 
 void ActualizarMEFSeaforo(void) {
-    void (*SemaforoFunc[SEMAFORO_QTY])(void) = {NormalState, AlarmState ,DisconnectedState};
+    void (*SemaforoFunc[SEMAFORO_QTY])(void) = {NormalState ,DisconnectedState, AlarmState};
     
     ActualizarMEFTecla(TEC2);
     if (CheckFallState(TEC2)) {
@@ -79,16 +79,6 @@ static void NormalState(void) {
     }
 }
 
-static void AlarmState(void) {
-    if(change_state) {
-        change_state = FALSE_T;
-        tiempo[0] = PERIODO_1S;
-        tiempo[1] = PERIODO_1S;
-        tiempo[2] = PERIODO_1S;
-        tiempo[3] = PERIODO_1S;
-        IniciarMEFSecuencia(secuencia[ALARM],tiempo,sizeof(secuencia[ALARM])/sizeof(secuencia[ALARM][0]));
-    }
-}
 
 static void DisconnectedState(void) {
     if(change_state) {
@@ -101,4 +91,14 @@ static void DisconnectedState(void) {
     }
 }
 
+static void AlarmState(void) {
+    if(change_state) {
+        change_state = FALSE_T;
+        tiempo[0] = PERIODO_1S;
+        tiempo[1] = PERIODO_1S;
+        tiempo[2] = PERIODO_1S;
+        tiempo[3] = PERIODO_1S;
+        IniciarMEFSecuencia(secuencia[ALARM],tiempo,sizeof(secuencia[ALARM])/sizeof(secuencia[ALARM][0]));
+    }
+}
 
