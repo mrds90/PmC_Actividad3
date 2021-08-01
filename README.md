@@ -75,6 +75,11 @@ y seleccione la edu_ciaa_nxp
 
 Siempre debe estar en la ruta raiz de la carpeta clonada "firmware_v3" con la terminal de CIAA Launcher si desea usar los comandos.
 
+Si el orden de los LEDs no son correspondientes debe comentar el #define del simbolo EDU_CIAA_OLD. (linea 15 del archivo semaforo.c)
+```
+// #define EDU_CIAA_OLD
+```
+
 ## Autor
 
 Marcos Dominguez

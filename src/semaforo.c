@@ -1,5 +1,6 @@
 /*=============================================================================
  * Author: Marcos Dominguez <mrds0690@gmail.com>
+ *
  * Date: 2021/08/01
  * Version: 1
  *===========================================================================*/
@@ -11,10 +12,18 @@
 #include "../inc/teclas.h"
 
 /*=====[Definitions of private constant]=================================*/
+#define EDU_CIAA_OLD //comentar si se tiene una version nueva de la edu_ciaa
+
 #define LED_OFF                 0
+#ifdef  EDU_CIAA_OLD
 #define LED_VERDE               LEDG_ON
 #define LED_ROJO                LED2_ON
 #define LED_AMARILLO            LED1_ON
+#else
+#define LED_ROJO                LED1_ON
+#define LED_AMARILLO            LED2_ON
+#define LED_VERDE               LED3_ON
+#endif
 #define PERIODO_500MS           500 
 #define PERIODO_1S              1000 
 #define PERIODO_3S              3000
