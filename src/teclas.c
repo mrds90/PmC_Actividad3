@@ -10,30 +10,6 @@
 #include "sapi.h"
 #include "secuencias.h"
 
-/*=====[Definitions of private functions]====================================*/
-/**
- * @brief leo el estado de la tecla
- * 
- * @param tecla gpioMap_t
- * @return bool_t (true si tecla apretada)
- */
-static bool leerTecla(gpioMap_t tecla);
-/**
- * @brief Devuleve la tecla recien presionada (solo por flanco)
- * 
- * @return gpioMap_t 
- */
-static gpioMap_t teclaValida(void);
-/**
- * @brief semaforo func gestiona el modo semáforo
- * 
- */
-static void semaforoFunc(void);
-/**
- * @brief inicializa los delay de la secuencia original
- * 
- */
-static void initSecuencia (void);
 /*=====[Definition macros of private constants]==============================*/
 #define PERIODO_1S              1000 
 #define PERIODO_500MS           500 
@@ -61,9 +37,6 @@ typedef struct {
 
 /*=====[Definitions of private global variables]=============================*/
 static dbn_t teclas[TEC4-TEC1+1];
-static bool_t flanco_ascendente[TEC4-TEC1+1];
-static bool_t flanco_descendente[TEC4-TEC1+1];
-static gpioMap_t tecla_actual;
 
 /*=====[Delaration of private functions]==================================*/
 static void UpState(dbn_t *dataTecla);
