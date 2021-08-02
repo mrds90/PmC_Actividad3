@@ -17,6 +17,7 @@
 #define PERIODO_3S              3000
 #define LED_OFF                 0
 
+/*=====[Definition of private data type]==============================*/
 typedef enum {
     UP,
     FALLING,
@@ -26,7 +27,6 @@ typedef enum {
     DEBOUNCE_QTY,
 } antirrebote_state_t;
     
-/*=====[Definition of private data type]==============================*/
 typedef struct {
    gpioMap_t tecla;
    delay_t delay;
